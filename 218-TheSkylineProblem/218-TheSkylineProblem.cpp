@@ -1,4 +1,4 @@
-// Last updated: 12/27/2025, 4:07:00 PM
+// Last updated: 12/27/2025, 4:10:02 PM
 1class Solution {
 2public:
 3    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
@@ -6,7 +6,7 @@
 5        // + is a end
 6
 7        vector<pair<int, int>> points;
-8        for(auto building : buildings) {
+8        for(auto& building : buildings) {
 9            points.push_back({building[0], -building[2]});
 10            points.push_back({building[1], building[2]});
 11        }
@@ -21,7 +21,7 @@
 20        int ongoingHeight = -1;
 21        vector<vector<int>> result;
 22
-23        for(auto point : points) {
+23        for(auto& point : points) {
 24            if(point.second < 0) pq.insert(-point.second);
 25            else pq.erase(pq.find(point.second));
 26
