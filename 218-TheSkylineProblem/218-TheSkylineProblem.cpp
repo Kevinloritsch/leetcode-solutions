@@ -1,4 +1,4 @@
-// Last updated: 12/27/2025, 4:10:02 PM
+// Last updated: 12/27/2025, 4:12:22 PM
 1class Solution {
 2public:
 3    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
