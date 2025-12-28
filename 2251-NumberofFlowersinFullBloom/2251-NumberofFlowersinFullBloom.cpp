@@ -1,4 +1,4 @@
-// Last updated: 12/27/2025, 5:21:35 PM
+// Last updated: 12/27/2025, 5:22:28 PM
 1class Solution {
 2public:
 3    vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& people) {
@@ -39,8 +39,8 @@
 38
 39        for(auto p : pplCopy) { 
 40            for(index; index < flowerEvents.size() && flowerEvents[index].first <= p; index++) {
-41                if(flowerEvents[index].second) { currActive++; }
-42                else { currActive--; }
+41                if(flowerEvents[index].second) currActive++;
+42                else currActive--;
 43            }
 44            table[p] = currActive; 
 45        }
