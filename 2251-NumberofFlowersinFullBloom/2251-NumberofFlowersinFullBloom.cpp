@@ -1,4 +1,4 @@
-// Last updated: 12/27/2025, 5:18:37 PM
+// Last updated: 12/27/2025, 5:21:35 PM
 1class Solution {
 2public:
 3    vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& people) {
@@ -9,7 +9,7 @@
 8        // hash them to grab when they pop in or out
 9        // keep a global count
 10        // push back the global count
-11        // runtime O(num flower + numPpl*log(numPpl))
+11        // runtime O(numFlwr*log(numFlwr) + numPpl*log(numPpl))
 12
 13        // we also need to handle ppl being outoforder
 14        // to do this, we can sort the array and handle it
@@ -18,7 +18,7 @@
 17
 18        // make array of flower events
 19        // i.e. <1, true> means a flower blooms at 1
-20        // <6, false> means flower goes away at 6
+20        // <7, false> means flower goes away at 7 (+ 1 since the flower stays through 6)
 21        vector<pair<int, bool>> flowerEvents;
 22
 23        for(int i = 0; i < flowers.size(); ++i) {
@@ -32,30 +32,25 @@
 31        std::sort(pplCopy.begin(), pplCopy.end());
 32
 33        int currActive = 0;
-34        int prevP = -1;
-35        int index = 0;
-36        int lastVal = flowerEvents[flowerEvents.size() - 1].first;
-37
-38        unordered_map<int, int> table;
-39
-40        for(auto p : pplCopy) {
-41            
-42            for(index; index < flowerEvents.size() && flowerEvents[index].first <= p; index++) {
-43                if(flowerEvents[index].second) { currActive++; }
-44                else { currActive--; }
-45            }
-46            if(p > lastVal) { table[p] = 0; continue; }
-47            table[p] = currActive;
-48            
-49            prevP = p;
+34        int index = 0;
+35        int lastVal = flowerEvents[flowerEvents.size() - 1].first;
+36
+37        unordered_map<int, int> table;
+38
+39        for(auto p : pplCopy) { 
+40            for(index; index < flowerEvents.size() && flowerEvents[index].first <= p; index++) {
+41                if(flowerEvents[index].second) { currActive++; }
+42                else { currActive--; }
+43            }
+44            table[p] = currActive; 
+45        }
+46
+47        vector<int> result;
+48        for(auto p : people) {
+49            result.push_back(table[p]);
 50        }
 51
-52        vector<int> result;
-53        for(auto p : people) {
-54            result.push_back(table[p]);
-55        }
-56
-57        return result;
-58        
-59    }
-60};
+52        return result;
+53        
+54    }
+55};
