@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 2:44:08 PM
+// Last updated: 1/2/2026, 2:48:10 PM
 1class Solution {
 2public:
 3    int maximumScore(vector<int>& scores, vector<vector<int>>& edges) {
@@ -28,49 +28,44 @@
 27        // precompute
 28        // we can hash these out
 29        
-30        vector<vector<int>> bestNeighbors(scores.size());
+30        vector<array<int,3>> bestNeighbors(scores.size(), {-1,-1,-1});
 31
 32        for (int i = 0; i < scores.size(); ++i) {
 33            int x = -1, y = -1, z = -1;
 34
 35            for (int j : graph[i]) {
 36                if (x == -1 || scores[j] > scores[x]) {
-37                    z = y;
-38                    y = x;
-39                    x = j;
-40                } else if (y == -1 || scores[j] > scores[y]) {
-41                    z = y;
-42                    y = j;
-43                } else if (z == -1 || scores[j] > scores[z]) {
-44                    z = j;
-45                }
-46            }
+37                    z = y; y = x; x = j;
+38                } else if (y == -1 || scores[j] > scores[y]) {
+39                    z = y; y = j;
+40                } else if (z == -1 || scores[j] > scores[z]) {
+41                    z = j;
+42                }
+43            }
+44
+45            bestNeighbors[i] = {x, y, z};
+46        }
 47
-48            if (x != -1) bestNeighbors[i].push_back(x);
-49            if (y != -1) bestNeighbors[i].push_back(y);
-50            if (z != -1) bestNeighbors[i].push_back(z);
-51        }
-52
-53        int bestOverall = -1;
+48        int bestOverall = -1;
+49
+50        for(auto i : edges) {
+51            int a = i[0];
+52            int b = i[1];
+53            // a and b guarenteed not equal
 54
-55        for(auto i : edges) {
-56            int a = i[0];
-57            int b = i[1];
-58            // a and b guarenteed not equal
-59
-60            // nested loop is 3 things by 3 things, O(1)
-61            for(auto c : bestNeighbors[a]) {
-62                if(c == -1) continue;
-63                for(auto d : bestNeighbors[b]) {
-64                    if(d == -1) continue;
-65                    if(c == d || a == c || a == d || b == c || b == d) continue;
-66
-67                    bestOverall = max(bestOverall, scores[a] + scores[b] + scores[c] + scores[d]);
-68                }
-69            }
-70
-71        }
-72
-73        return bestOverall;
-74    }
-75};
+55            // nested loop is 3 things by 3 things, O(1)
+56            for(auto c : bestNeighbors[a]) {
+57                if(c == -1) continue;
+58                for(auto d : bestNeighbors[b]) {
+59                    if(d == -1) continue;
+60                    if(c == d || a == d || b == c) continue;
+61
+62                    bestOverall = max(bestOverall, scores[a] + scores[b] + scores[c] + scores[d]);
+63                }
+64            }
+65
+66        }
+67
+68        return bestOverall;
+69    }
+70};
