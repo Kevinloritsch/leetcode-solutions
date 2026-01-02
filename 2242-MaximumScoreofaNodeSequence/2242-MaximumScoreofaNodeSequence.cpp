@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 1:47:01 PM
+// Last updated: 1/2/2026, 2:41:42 PM
 1class Solution {
 2public:
 3    int maximumScore(vector<int>& scores, vector<vector<int>>& edges) {
@@ -29,17 +29,17 @@
 28        // we can hash these out
 29        // and find them using a pq... so we go through each edge, push them all, then pop 3
 30        
-31        vector<vector<int>> threeNeighbors(scores.size(), vector<int>(3, -1));
+31        vector<vector<int>> bestNeighbors(scores.size());
 32        for(int i = 0; i < scores.size(); ++i) {
-33            // score, node #
-34            priority_queue<pair<int, int>> bestNeighbors;
-35            for(auto j : graph[i]) { bestNeighbors.push({scores[j], j}); }
-36
-37            for(int k = 0; k < 3; ++k) {
-38                if(bestNeighbors.empty()) break;
-39                threeNeighbors[i][k] = bestNeighbors.top().second;
-40                bestNeighbors.pop();
-41            }
+33            // node #
+34            for(auto j : graph[i]) { bestNeighbors[i].push_back(j); }
+35
+36            sort(bestNeighbors[i].begin(), bestNeighbors[i].end(),
+37            [&](int a, int b) {
+38                return scores[a] > scores[b];
+39            });
+40
+41            if (bestNeighbors[i].size() > 3) bestNeighbors[i].resize(3);
 42        }
 43
 44
@@ -51,25 +51,18 @@
 50            // a and b guarenteed not equal
 51
 52            // nested loop is 3 things by 3 things, O(1)
-53            for(auto c : threeNeighbors[a]) {
+53            for(auto c : bestNeighbors[a]) {
 54                if(c == -1) continue;
-55                for(auto d : threeNeighbors[b]) {
+55                for(auto d : bestNeighbors[b]) {
 56                    if(d == -1) continue;
 57                    if(c == d || a == c || a == d || b == c || b == d) continue;
 58
 59                    bestOverall = max(bestOverall, scores[a] + scores[b] + scores[c] + scores[d]);
-60                    // if(bestOverall == scores[a] + scores[b] + scores[c] + scores[d]) {
-61                    //     cout << a << " " << scores[a] << endl;
-62                    //     cout << b << " " << scores[b] << endl;
-63                    //     cout << c << " " << scores[c] << endl;
-64                    //     cout << d << " " << scores[d] << endl;
-65                    //     cout << bestOverall << endl << endl;
-66                    // }
-67                }
-68            }
-69
-70        }
-71
-72        return bestOverall;
-73    }
-74};
+60                }
+61            }
+62
+63        }
+64
+65        return bestOverall;
+66    }
+67};
