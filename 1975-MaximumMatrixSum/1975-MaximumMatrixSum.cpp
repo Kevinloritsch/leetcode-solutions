@@ -1,4 +1,4 @@
-// Last updated: 1/4/2026, 6:17:09 PM
+// Last updated: 1/4/2026, 6:18:34 PM
 1class Solution {
 2public:
 3    long long maxMatrixSum(vector<vector<int>>& matrix) {
@@ -8,12 +8,12 @@
 7        int smallestOverall = INT_MAX;
 8        int numNegative = 0;
 9
-10        for(auto i : matrix) {
-11            for(auto j : i) {
-12                smallestOverall = min(smallestOverall, abs(j));
-13
-14                if(j <= 0) { ++numNegative; sum += (j * -1); }
-15                else sum += j;
+10        for (const auto& row : matrix) {
+11            for (int x : row) {
+12                int ax = x < 0 ? -x : x;
+13                sum += ax;
+14                smallestOverall = min(smallestOverall, ax);
+15                if (x < 0) numNegative++;
 16            }
 17        }
 18
