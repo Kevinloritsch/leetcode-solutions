@@ -1,17 +1,17 @@
-// Last updated: 12/27/2025, 3:45:23 PM
-class Solution {
-public:
-    int maxSubArray(vector<int>& nums) {
-
-        int currSum = nums[0];
-        int maxSum = nums[0];
-
-        for(int i = 1; i < nums.size(); ++i) {
-            currSum = max(nums[i], currSum + nums[i]);
-            maxSum = max(maxSum, currSum);
-        }
-
-        return maxSum;
-        
-    }
-};
+// Last updated: 1/8/2026, 3:08:00 PM
+1class Solution {
+2public:
+3    int maxSubArray(vector<int>& nums) {
+4
+5        int currSum = nums[0];
+6        int maxSum = nums[0];
+7
+8        for(int i = 1; i < nums.size(); ++i) {
+9            currSum = max(nums[i], currSum + nums[i]);
+10            maxSum = max(maxSum, currSum);
+11        }
+12
+13        return maxSum;
+14        
+15    }
+16};
