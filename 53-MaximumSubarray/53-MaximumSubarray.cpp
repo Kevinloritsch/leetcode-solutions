@@ -1,4 +1,4 @@
-// Last updated: 1/8/2026, 3:08:18 PM
+// Last updated: 1/8/2026, 5:14:49 PM
 1class Solution {
 2public:
 3    int maxSubArray(vector<int>& nums) {
@@ -10,7 +10,8 @@
 9            currSum = max(currSum + nums[i], nums[i]);
 10            maxSum = max(maxSum, currSum);
 11        }
-12        return maxSum;
-13        
-14    }
-15};
+12
+13        return maxSum;
+14        
+15    }
+16};
