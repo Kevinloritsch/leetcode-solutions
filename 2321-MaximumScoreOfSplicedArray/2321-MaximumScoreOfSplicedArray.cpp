@@ -1,4 +1,4 @@
-// Last updated: 1/8/2026, 3:19:41 PM
+// Last updated: 1/8/2026, 5:19:03 PM
 1class Solution {
 2public:
 3    int maximumsSplicedArray(vector<int>& nums1, vector<int>& nums2) {
@@ -6,12 +6,12 @@
 5        int globalSum1 = 0;
 6        int globalSum2 = 0;
 7
-8        for(auto i : nums1) globalSum1 += i;
-9        for(auto j : nums2) globalSum2 += j;
+8        for(int i : nums1) globalSum1 += i;
+9        for(int i : nums2) globalSum2 += i;
 10
 11        int currSum1 = 0;
-12        int maxSum1 = 0;
-13        int currSum2 = 0;
+12        int currSum2 = 0;
+13        int maxSum1 = 0;
 14        int maxSum2 = 0;
 15
 16        for(int i = 0; i < nums1.size(); ++i) {
