@@ -1,4 +1,4 @@
-// Last updated: 1/9/2026, 6:18:33 PM
+// Last updated: 1/9/2026, 6:20:12 PM
 1class Solution {
 2public:
 3    int minimumDeleteSum(string s1, string s2) {
@@ -22,12 +22,8 @@
 21
 22        if(dp[i][j] != -1) return dp[i][j];
 23
-24
-25        if(s1[i] == s2[j]) return sum(s1, s2, i - 1, j - 1, dp);
-26
-27        int poss1 = sum(s1, s2, i - 1, j, dp) + int(s1[i]);
-28        int poss2 = sum(s1, s2, i, j - 1, dp) + int(s2[j]);
-29        int poss3 = sum(s1, s2, i - 1, j - 1, dp) + int(s1[i]) + int(s2[j]);
-30        return dp[i][j] = min(poss1, min(poss2, poss3));
-31    }
-32};
+24        if(s1[i] == s2[j]) return dp[i][j] = sum(s1, s2, i - 1, j - 1, dp);
+25
+26        return dp[i][j] = min(sum(s1, s2, i - 1, j, dp) + int(s1[i]), sum(s1, s2, i, j - 1, dp) + int(s2[j]));
+27    }
+28};
