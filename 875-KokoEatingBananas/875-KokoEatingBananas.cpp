@@ -1,10 +1,10 @@
-// Last updated: 1/29/2026, 4:47:42 PM
+// Last updated: 1/29/2026, 4:48:03 PM
 1class Solution {
 2public:
 3    int minEatingSpeed(vector<int>& piles, int h) {
 4
 5        int low = 1;
-6        int high = INT_MAX;
+6        int high = INT_MAX / 2;
 7        int candidate = high;
 8
 9        while (low <= high) {
