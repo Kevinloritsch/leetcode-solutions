@@ -1,4 +1,4 @@
-// Last updated: 1/29/2026, 5:06:35 PM
+// Last updated: 1/29/2026, 6:55:14 PM
 1class Solution {
 2public:
 3    int minEatingSpeed(vector<int>& piles, int h) {
@@ -8,25 +8,28 @@
 7        int candidate = INT_MAX;
 8        int mid;
 9
-10        while(high >= low) {
+10        while(low <= high) {
 11            mid = low + (high - low) / 2;
 12
 13            int r = h;
-14
-15            for(auto i : piles) {
-16                if(i <= mid) --r;
-17                else if (i % mid == 0) r -= (i / mid);
-18                else r -= (i / mid) + 1;
-19            }
-20
-21            if(r < 0) low = mid + 1;
-22            else {
-23                candidate = min(candidate, mid);
-24                high = mid - 1;
-25            }
+14            for(auto i : piles) {
+15                if(i <= mid) --r;
+16                else if (i % mid == 0) r -= (i / mid);
+17                else r -= (i / mid) + 1;
+18            }
+19
+20            if(r < 0) low = mid + 1;
+21            else {
+22                candidate = min(candidate, mid);
+23                high = mid - 1;
+24            }
+25
 26        }
 27
-28        return candidate;
-29    }
-30};
+28
+29        return candidate;
+30
 31
+32    }
+33};
+34
