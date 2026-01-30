@@ -1,4 +1,4 @@
-// Last updated: 1/29/2026, 4:48:03 PM
+// Last updated: 1/29/2026, 4:48:40 PM
 1class Solution {
 2public:
 3    int minEatingSpeed(vector<int>& piles, int h) {
@@ -12,25 +12,19 @@
 11
 12            long hoursLeft = h;
 13            for (int i : piles) {
-14                if (i <= mid) {
-15                    hoursLeft -= 1;
-16                }
-17                else if (i % mid == 0) {
-18                    hoursLeft -= i / mid;
-19                }
-20                else {
-21                    hoursLeft -= (i / mid) + 1;
-22                }
+14                if (i <= mid) hoursLeft -= 1;
+15                else if (i % mid == 0) hoursLeft -= i / mid;
+16                else hoursLeft -= (i / mid) + 1;
+17            }
+18
+19            if (hoursLeft < 0) low = mid + 1;
+20            else {
+21                candidate = mid;
+22                high = mid - 1;
 23            }
-24
-25            if (hoursLeft < 0) low = mid + 1;
-26            else {
-27                candidate = mid;
-28                high = mid - 1;
-29            }
-30        }
-31
-32        return candidate;
-33    }
-34};
-35
+24        }
+25
+26        return candidate;
+27    }
+28};
+29
