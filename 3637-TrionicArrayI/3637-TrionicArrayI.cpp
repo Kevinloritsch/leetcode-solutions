@@ -1,4 +1,4 @@
-// Last updated: 2/3/2026, 5:38:26 PM
+// Last updated: 2/3/2026, 5:38:55 PM
 1class Solution {
 2public:
 3    bool isTrionic(vector<int>& nums) {
@@ -19,13 +19,13 @@
 18
 19            else if(counter == 1) {
 20                if(nums[i] == prev) return false;
-21                else if(nums[i] < prev) { prev = nums[i]; ++num; continue; }
+21                else if(nums[i] < prev) { prev = nums[i]; continue; }
 22                else { ++counter; prev = nums[i]; }
 23            }
 24
 25            else {
 26                if(nums[i] == prev) return false;
-27                else if(nums[i] > prev) { prev = nums[i]; ++num; continue; }
+27                else if(nums[i] > prev) { prev = nums[i]; continue; }
 28                else { ++counter; prev = nums[i]; }
 29            }
 30        }
