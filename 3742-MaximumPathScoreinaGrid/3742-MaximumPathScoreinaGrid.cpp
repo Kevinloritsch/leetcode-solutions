@@ -1,4 +1,4 @@
-// Last updated: 4/30/2026, 8:37:06 AM
+// Last updated: 4/30/2026, 8:37:31 AM
 1class Solution {
 2public:
 3    int maxPathScore(vector<vector<int>>& grid, int k) {
