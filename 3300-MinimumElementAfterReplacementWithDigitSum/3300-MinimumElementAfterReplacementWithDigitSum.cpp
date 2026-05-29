@@ -1,4 +1,4 @@
-// Last updated: 5/28/2026, 7:49:36 PM
+// Last updated: 5/28/2026, 7:52:40 PM
 1class Solution {
 2public:
 3    int minElement(vector<int>& nums) {
