@@ -1,4 +1,4 @@
-// Last updated: 6/1/2026, 10:53:10 AM
+// Last updated: 6/1/2026, 10:53:27 AM
 1class Solution {
 2public:
 3    int minimumCost(vector<int>& cost) {
